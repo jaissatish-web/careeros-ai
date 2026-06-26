@@ -6,13 +6,13 @@ import { Menu, X, Sparkles } from "lucide-react";
 import Button from "./ui/Button";
 
 const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Resume Builder", href: "#resume" },
-  { label: "LinkedIn", href: "#linkedin" },
-  { label: "Cover Letter", href: "#cover-letter" },
-  { label: "Job Tracker", href: "#job-tracker" },
-  { label: "Interview Coach", href: "#interview" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Features", href: "/#features" },
+  { label: "Resume Builder", href: "/resume-builder" },
+  { label: "LinkedIn", href: "/linkedin-optimizer" },
+  { label: "Cover Letter", href: "/cover-letter" },
+  { label: "Job Tracker", href: "/job-tracker" },
+  { label: "Interview Coach", href: "/interview-coach" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 export default function Navbar() {
