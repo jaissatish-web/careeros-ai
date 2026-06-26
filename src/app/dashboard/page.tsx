@@ -735,7 +735,7 @@ export default function DashboardPage() {
                     <div className='flex items-center justify-between'>
                       <CountdownTimer date={interview.date} />
                       <span className='text-[11px] text-gray-500'>
-                        {interview.date.toLocaleTimeString('en-US', {
+                        {new Date(interview.date).toLocaleTimeString('en-US', {
                           hour: '2-digit',
                           minute: '2-digit',
                         })}
