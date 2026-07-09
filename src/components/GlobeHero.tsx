@@ -21,14 +21,16 @@ export default function GlobeHero() {
         "three/examples/jsm/controls/OrbitControls.js"
       );
 
+      const isMobile = el.clientWidth < 768;
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(
-        45,
+        isMobile ? 50 : 45,
         el.clientWidth / el.clientHeight,
         0.1,
         1000
       );
-      camera.position.set(0, 0.6, 3.0);
+      const camDist = isMobile ? 3.8 : 3.0;
+      camera.position.set(0, 0.6, camDist);
 
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -48,8 +50,8 @@ export default function GlobeHero() {
       controls.rotateSpeed = 0.6;
       controls.autoRotate = true;
       controls.autoRotateSpeed = 0.9;
-      controls.minDistance = 1.8;
-      controls.maxDistance = 5.5;
+      controls.minDistance = isMobile ? 2.0 : 1.8;
+      controls.maxDistance = isMobile ? 7.0 : 5.5;
       controls.enablePan = false;
 
       // Stars
@@ -360,13 +362,13 @@ export default function GlobeHero() {
           backgroundSize: "60px 60px",
         }}
       />
-      <div className="relative z-10 w-full h-full flex flex-col justify-center items-center text-center px-6 pointer-events-none">
+      <div className="relative z-10 w-full h-full flex flex-col justify-center items-center text-center px-4 md:px-6 pointer-events-none">
         <div className="pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-5 py-2 mb-8 rounded-full text-xs font-semibold uppercase tracking-widest"
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 md:px-5 md:py-2 md:mb-8 rounded-full text-[10px] md:text-xs font-semibold uppercase tracking-widest"
             style={{
               background: "rgba(212,175,55,0.08)",
               backdropFilter: "blur(8px)",
@@ -383,7 +385,7 @@ export default function GlobeHero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-heading text-[clamp(40px,8vw,80px)] font-extrabold leading-[1.05] max-w-[1000px] mb-5"
+            className="font-heading text-[clamp(32px,9vw,80px)] md:text-[clamp(40px,8vw,80px)] font-extrabold leading-[1.05] max-w-[1000px] mb-3 md:mb-5"
             style={{
               background: "linear-gradient(180deg, #FFFFFF 20%, rgba(255,255,255,0.6) 100%)",
               WebkitBackgroundClip: "text",
@@ -400,7 +402,7 @@ export default function GlobeHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[clamp(15px,1.3vw,20px)] font-light max-w-[580px] mb-10 leading-relaxed tracking-[0.3px]"
+            className="text-[clamp(13px,1.2vw,20px)] md:text-[clamp(15px,1.3vw,20px)] font-light max-w-[580px] mb-6 md:mb-10 leading-relaxed tracking-[0.3px] px-2"
             style={{ color: "#B0C4DE", opacity: 0.7 }}
           >
             ATS-optimised resumes, AI-powered LinkedIn optimization, and
@@ -411,14 +413,14 @@ export default function GlobeHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap gap-3 justify-center mb-10"
+            className="flex flex-wrap gap-2 md:gap-3 justify-center mb-6 md:mb-10"
           >
             {[
               { icon: "\u2713", label: "98.6% Success Rate" },
               { icon: "\u26A1", label: "ATS Optimized" },
               { icon: "\uD83C\uDF10", label: "EN / AR Bilingual" },
             ].map((tag, i) => (
-              <span key={i} className="text-xs font-medium px-4 py-1.5 rounded-full backdrop-blur-sm tracking-[0.5px]"
+              <span key={i} className="text-[10px] md:text-xs font-medium px-3 py-1 md:px-4 md:py-1.5 rounded-full backdrop-blur-sm tracking-[0.5px]"
                 style={{ color: "rgba(255,255,255,0.55)", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
               >
                 {tag.icon} {tag.label}
@@ -429,16 +431,16 @@ export default function GlobeHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-wrap gap-5 justify-center"
+            className="flex flex-col sm:flex-row gap-3 md:gap-5 justify-center w-full max-w-sm sm:max-w-none mx-auto"
           >
             <Button variant="primary" size="lg"
-              className="!bg-gradient-to-r !from-[#D4AF37] !to-[#B8941E] !text-[#07070E] !font-bold !shadow-[0_8px_40px_rgba(212,175,55,0.35)] hover:!shadow-[0_16px_60px_rgba(212,175,55,0.5)] hover:!translate-y-[-4px] !border-none !px-12 !py-4 !text-base !rounded-full"
+              className="!bg-gradient-to-r !from-[#D4AF37] !to-[#B8941E] !text-[#07070E] !font-bold !shadow-[0_8px_40px_rgba(212,175,55,0.35)] hover:!shadow-[0_16px_60px_rgba(212,175,55,0.5)] hover:!translate-y-[-4px] !border-none !px-12 !py-4 !text-base !rounded-full !w-full sm:!w-auto"
             >
               <Sparkles className="w-5 h-5" />
               Start Your Career &mdash; Free
             </Button>
             <Button variant="secondary" size="lg"
-              className="!bg-white/[0.03] !backdrop-blur-xl !border !border-white/[0.12] !text-white !px-12 !py-4 !text-base !rounded-full hover:!bg-white/[0.08] hover:!border-[#D4AF37] hover:!translate-y-[-4px]"
+              className="!bg-white/[0.03] !backdrop-blur-xl !border !border-white/[0.12] !text-white !px-8 md:!px-12 !py-3 md:!py-4 !text-sm md:!text-base !rounded-full hover:!bg-white/[0.08] hover:!border-[#D4AF37] hover:!translate-y-[-4px] !w-full sm:!w-auto"
             >
               <Play className="w-5 h-5" />
               Watch Demo
@@ -446,17 +448,17 @@ export default function GlobeHero() {
           </motion.div>
         </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-40 pointer-events-none">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 opacity-40 pointer-events-none hidden md:flex">
         <span className="text-[10px] uppercase tracking-[4px] font-light">Explore</span>
         <svg className="w-5 h-5" style={{ color: "#D4AF37" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
         </svg>
       </div>
-      <div className="absolute bottom-8 right-11 z-10 pointer-events-none backdrop-blur-md px-5 py-2.5 rounded-full"
+      <div className="absolute bottom-8 right-4 md:right-11 z-10 pointer-events-none backdrop-blur-md px-3 md:px-5 py-1.5 md:py-2.5 rounded-full"
         style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.04)" }}
       >
-        <span className="text-2xl font-bold font-heading" style={{ color: "#00F0FF" }}>24</span>
-        <span className="block text-[9px] opacity-40 tracking-[1.5px] uppercase">Live Global Routes</span>
+        <span className="text-lg md:text-2xl font-bold font-heading" style={{ color: "#00F0FF" }}>24</span>
+        <span className="hidden md:block text-[9px] opacity-40 tracking-[1.5px] uppercase">Live Global Routes</span>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#07070E] to-transparent z-[3]" />
     </section>
