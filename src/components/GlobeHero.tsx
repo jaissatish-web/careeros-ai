@@ -1,0 +1,464 @@
+"use client";
+
+import { useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Play, Sparkles, Award } from "lucide-react";
+import Button from "./ui/Button";
+
+export default function GlobeHero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let cleanup: (() => void) | null = null;
+    const container = containerRef.current;
+
+    async function initGlobe() {
+      if (!container) return;
+      const el = container;
+
+      const THREE = await import("three");
+      const { OrbitControls } = await import(
+        "three/examples/jsm/controls/OrbitControls.js"
+      );
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(
+        45,
+        el.clientWidth / el.clientHeight,
+        0.1,
+        1000
+      );
+      camera.position.set(0, 0.6, 3.0);
+
+      const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: false,
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.2;
+      renderer.domElement.style.display = "block";
+      renderer.domElement.style.width = "100%";
+      renderer.domElement.style.height = "100%";
+      el.appendChild(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.rotateSpeed = 0.6;
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.9;
+      controls.minDistance = 1.8;
+      controls.maxDistance = 5.5;
+      controls.enablePan = false;
+
+      // Stars
+      const starsGeo = new THREE.BufferGeometry();
+      const starCount = 3000;
+      const starPos = new Float32Array(starCount * 3);
+      for (let i = 0; i < starCount * 3; i++) {
+        starPos[i] = (Math.random() - 0.5) * 200;
+      }
+      starsGeo.setAttribute("position", new THREE.BufferAttribute(starPos, 3));
+      const starMat = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.08,
+        transparent: true,
+        opacity: 0.8,
+        blending: THREE.AdditiveBlending,
+      });
+      scene.add(new THREE.Points(starsGeo, starMat));
+
+      // Earth
+      const EARTH_RADIUS = 1.0;
+      const earthGroup = new THREE.Group();
+      scene.add(earthGroup);
+
+      const textureLoader = new THREE.TextureLoader();
+      const earthMap = textureLoader.load(
+        "https://threejs.org/examples/textures/planets/earth_atmos_2048.jpg"
+      );
+      const earthMat = new THREE.MeshStandardMaterial({
+        map: earthMap,
+        roughness: 0.5,
+        metalness: 0.1,
+      });
+      const earth = new THREE.Mesh(
+        new THREE.SphereGeometry(EARTH_RADIUS, 64, 64),
+        earthMat
+      );
+      earthGroup.add(earth);
+
+      // Gold atmosphere
+      const glowVertex = `varying vec3 vNormal; varying vec3 vViewDir; void main() {
+        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+        vNormal = normalize(normalMatrix * normal);
+        vViewDir = normalize(-mvPos.xyz);
+        gl_Position = projectionMatrix * mvPos;
+      }`;
+      const glowFragment = `uniform vec3 glowColor; uniform float intensity;
+        varying vec3 vNormal; varying vec3 vViewDir;
+        void main() {
+          float rim = 1.0 - max(0.0, dot(vNormal, vViewDir));
+          rim = pow(rim, 3.0) * intensity;
+          gl_FragColor = vec4(glowColor, rim * 0.6);
+        }`;
+      const atmosphereMat = new THREE.ShaderMaterial({
+        vertexShader: glowVertex,
+        fragmentShader: glowFragment,
+        uniforms: {
+          glowColor: { value: new THREE.Color(0xd4af37) },
+          intensity: { value: 1.0 },
+        },
+        side: THREE.FrontSide,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
+      const atmosphere = new THREE.Mesh(
+        new THREE.SphereGeometry(EARTH_RADIUS * 1.015, 48, 48),
+        atmosphereMat
+      );
+      earthGroup.add(atmosphere);
+
+      // Lights
+      scene.add(new THREE.AmbientLight(0x404060, 0.6));
+      const sun = new THREE.DirectionalLight(0xffffff, 2.5);
+      sun.position.set(5, 3, 5);
+      scene.add(sun);
+      const back = new THREE.DirectionalLight(0x4488ff, 0.8);
+      back.position.set(-3, -1, -4);
+      scene.add(back);
+
+      // 16 Cities
+      const cities = [
+        { name: "London", lat: 51.5, lon: -0.1 },
+        { name: "New York", lat: 40.7, lon: -74.0 },
+        { name: "Singapore", lat: 1.35, lon: 103.8 },
+        { name: "Sydney", lat: -33.86, lon: 151.2 },
+        { name: "Dubai", lat: 25.2, lon: 55.2 },
+        { name: "Tokyo", lat: 35.67, lon: 139.65 },
+        { name: "San Francisco", lat: 37.77, lon: -122.41 },
+        { name: "Mumbai", lat: 19.07, lon: 72.87 },
+        { name: "Los Angeles", lat: 34.05, lon: -118.24 },
+        { name: "Mexico City", lat: 19.43, lon: -99.13 },
+        { name: "Sao Paulo", lat: -23.55, lon: -46.63 },
+        { name: "Johannesburg", lat: -26.2, lon: 28.04 },
+        { name: "Moscow", lat: 55.75, lon: 37.61 },
+        { name: "Beijing", lat: 39.9, lon: 116.4 },
+        { name: "Bangkok", lat: 13.75, lon: 100.5 },
+        { name: "Paris", lat: 48.85, lon: 2.35 },
+      ];
+
+      function latLonToVec3(lat: number, lon: number, radius: number) {
+        const phi = ((90 - lat) * Math.PI) / 180;
+        const theta = ((lon + 180) * Math.PI) / 180;
+        return new THREE.Vector3(
+          -radius * Math.sin(phi) * Math.cos(theta),
+          radius * Math.cos(phi),
+          radius * Math.sin(phi) * Math.sin(theta)
+        );
+      }
+
+      // Markers
+      const markerGroup = new THREE.Group();
+      earthGroup.add(markerGroup);
+
+      const glowMat = new THREE.SpriteMaterial({
+        map: (() => {
+          const canvas = document.createElement("canvas");
+          canvas.width = 64; canvas.height = 64;
+          const ctx = canvas.getContext("2d")!;
+          const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+          g.addColorStop(0, "rgba(212, 175, 55, 1)");
+          g.addColorStop(0.2, "rgba(212, 175, 55, 0.8)");
+          g.addColorStop(1, "rgba(212, 175, 55, 0)");
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, 64, 64);
+          return new THREE.CanvasTexture(canvas);
+        })(),
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        transparent: true,
+      });
+
+      const cityPositions: Array<import("three").Vector3> = [];
+      cities.forEach((city) => {
+        const pos = latLonToVec3(city.lat, city.lon, EARTH_RADIUS * 1.002);
+        cityPositions.push(pos);
+        const pinGroup = new THREE.Group();
+        pinGroup.position.copy(pos);
+        const core = new THREE.Mesh(
+          new THREE.SphereGeometry(0.018, 8, 8),
+          new THREE.MeshBasicMaterial({ color: 0xd4af37 })
+        );
+        pinGroup.add(core);
+        const glowSprite = new THREE.Sprite(glowMat);
+        glowSprite.scale.set(0.2, 0.2, 1);
+        pinGroup.add(glowSprite);
+        markerGroup.add(pinGroup);
+      });
+
+      // 24 Route Pairs
+      const routePairs: [number, number][] = [
+        [0, 1], [0, 15], [0, 12], [0, 4],
+        [1, 6], [1, 8], [1, 9], [1, 10],
+        [9, 10], [10, 11], [11, 4], [4, 7],
+        [4, 2], [7, 2], [2, 14], [2, 5],
+        [2, 3], [14, 13], [13, 5], [5, 3],
+        [8, 5], [6, 8], [6, 5], [12, 13],
+      ];
+
+      const routeData: {
+        curve: import("three").QuadraticBezierCurve3;
+        dashLine: import("three").Line;
+        beacon: import("three").Sprite;
+        progress: number;
+        speed: number;
+      }[] = [];
+
+      routePairs.forEach(([iA, iB]) => {
+        const start = cityPositions[iA];
+        const end = cityPositions[iB];
+        const mid = start.clone().add(end).multiplyScalar(0.5);
+        const distance = start.distanceTo(end);
+        const height = EARTH_RADIUS + distance * 0.55 + 0.2;
+        const control = mid.clone().normalize().multiplyScalar(height);
+        const curve = new THREE.QuadraticBezierCurve3(start, control, end);
+        const points = curve.getPoints(60);
+
+        const dashMat = new THREE.LineDashedMaterial({
+          color: 0xd4af37,
+          dashSize: 0.035,
+          gapSize: 0.025,
+          transparent: true,
+          opacity: 0.95,
+          blending: THREE.AdditiveBlending,
+        });
+        const dashGeo = new THREE.BufferGeometry().setFromPoints(points);
+        const dashLine = new THREE.Line(dashGeo, dashMat);
+        dashLine.computeLineDistances();
+        earthGroup.add(dashLine);
+
+        const beaconMat = new THREE.SpriteMaterial({
+          map: (() => {
+            const canvas = document.createElement("canvas");
+            canvas.width = 128; canvas.height = 128;
+            const ctx = canvas.getContext("2d")!;
+            const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+            g.addColorStop(0, "rgba(246, 226, 122, 1)");
+            g.addColorStop(0.1, "rgba(212, 175, 55, 1)");
+            g.addColorStop(0.5, "rgba(212, 175, 55, 0.6)");
+            g.addColorStop(1, "rgba(212, 175, 55, 0)");
+            ctx.fillStyle = g;
+            ctx.fillRect(0, 0, 128, 128);
+            return new THREE.CanvasTexture(canvas);
+          })(),
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          transparent: true,
+        });
+        const beacon = new THREE.Sprite(beaconMat);
+        beacon.scale.set(0.1, 0.1, 1);
+        earthGroup.add(beacon);
+
+        routeData.push({
+          curve, dashLine, beacon,
+          progress: Math.random(),
+          speed: 0.001 + Math.random() * 0.002,
+        });
+      });
+
+      // Resize
+      function resizeRenderer() {
+        const w = el.clientWidth;
+        const h = el.clientHeight;
+        if (w > 0 && h > 0) {
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          renderer.setSize(w, h);
+        }
+      }
+      window.addEventListener("resize", resizeRenderer);
+      resizeRenderer();
+
+      // Animate
+      const clock = new THREE.Clock();
+      let animFrameId: number;
+      function animate() {
+        const delta = clock.getDelta();
+        const elapsed = performance.now() / 1000;
+        routeData.forEach((r) => {
+          r.progress += r.speed * delta * 30;
+          if (r.progress > 1) r.progress -= 1;
+          (r.dashLine.material as any).dashOffset = -elapsed * 0.06;
+          const pos = r.curve.getPoint(r.progress);
+          r.beacon.position.copy(pos);
+          const pulse = 0.1 + Math.sin(elapsed * 4 + r.progress * 10) * 0.025;
+          r.beacon.scale.set(pulse, pulse, 1);
+        });
+        controls.update();
+        renderer.render(scene, camera);
+        animFrameId = requestAnimationFrame(animate);
+      }
+      animate();
+
+      // Pause auto-rotate on interaction
+      let wheelTimer: ReturnType<typeof setTimeout>;
+      renderer.domElement.addEventListener("pointerdown", () => { controls.autoRotate = false; });
+      renderer.domElement.addEventListener("pointerup", () => {
+        setTimeout(() => { controls.autoRotate = true; }, 3000);
+      });
+      renderer.domElement.addEventListener("wheel", () => {
+        controls.autoRotate = false;
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(() => { controls.autoRotate = true; }, 3000);
+      });
+
+      // Cleanup
+      cleanup = () => {
+        cancelAnimationFrame(animFrameId);
+        window.removeEventListener("resize", resizeRenderer);
+        renderer.dispose();
+        if (renderer.domElement.parentNode === el) {
+          el.removeChild(renderer.domElement);
+        }
+        scene.traverse((obj) => {
+          if (obj instanceof THREE.Mesh) {
+            obj.geometry?.dispose();
+            if (Array.isArray(obj.material)) {
+              obj.material.forEach((m) => m.dispose());
+            } else {
+              obj.material?.dispose();
+            }
+          }
+          if (obj instanceof THREE.Line) {
+            obj.geometry?.dispose();
+            obj.material?.dispose();
+          }
+          if (obj instanceof THREE.Points) {
+            obj.geometry?.dispose();
+            obj.material?.dispose();
+          }
+        });
+      };
+    }
+
+    initGlobe();
+    return () => { if (cleanup) cleanup(); };
+  }, []);
+
+  return (
+    <section className="relative w-full h-screen overflow-hidden bg-[#07070E]">
+      <div ref={containerRef} className="absolute inset-0 z-[1]" />
+      <div className="absolute inset-0 z-[2] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at center, transparent 40%, rgba(7,7,14,0.7) 100%)" }}
+      />
+      <div className="absolute inset-0 z-[2] pointer-events-none"
+        style={{
+          backgroundImage: "linear-gradient(rgba(212,175,55,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+      <div className="relative z-10 w-full h-full flex flex-col justify-center items-center text-center px-6 pointer-events-none">
+        <div className="pointer-events-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-5 py-2 mb-8 rounded-full text-xs font-semibold uppercase tracking-widest"
+            style={{
+              background: "rgba(212,175,55,0.08)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              border: "1px solid rgba(212,175,55,0.25)",
+              color: "#F6E27A",
+              boxShadow: "0 0 40px rgba(212,175,55,0.05)",
+            }}
+          >
+            <Award className="w-4 h-4" />
+            <span>#1 AI Career Platform for the Gulf</span>
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="font-heading text-[clamp(40px,8vw,80px)] font-extrabold leading-[1.05] max-w-[1000px] mb-5"
+            style={{
+              background: "linear-gradient(180deg, #FFFFFF 20%, rgba(255,255,255,0.6) 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "0 0 80px rgba(0,240,255,0.08)",
+            }}
+          >
+            Your Career,{" "}
+            <span style={{ background: "linear-gradient(135deg, #F6E27A, #D4AF37)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+              Globally Connected.
+            </span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-[clamp(15px,1.3vw,20px)] font-light max-w-[580px] mb-10 leading-relaxed tracking-[0.3px]"
+            style={{ color: "#B0C4DE", opacity: 0.7 }}
+          >
+            ATS-optimised resumes, AI-powered LinkedIn optimization, and
+            interview coaching &mdash; built for ambitious professionals across the
+            Middle East &amp; beyond.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap gap-3 justify-center mb-10"
+          >
+            {[
+              { icon: "\u2713", label: "98.6% Success Rate" },
+              { icon: "\u26A1", label: "ATS Optimized" },
+              { icon: "\uD83C\uDF10", label: "EN / AR Bilingual" },
+            ].map((tag, i) => (
+              <span key={i} className="text-xs font-medium px-4 py-1.5 rounded-full backdrop-blur-sm tracking-[0.5px]"
+                style={{ color: "rgba(255,255,255,0.55)", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
+              >
+                {tag.icon} {tag.label}
+              </span>
+            ))}
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-wrap gap-5 justify-center"
+          >
+            <Button variant="primary" size="lg"
+              className="!bg-gradient-to-r !from-[#D4AF37] !to-[#B8941E] !text-[#07070E] !font-bold !shadow-[0_8px_40px_rgba(212,175,55,0.35)] hover:!shadow-[0_16px_60px_rgba(212,175,55,0.5)] hover:!translate-y-[-4px] !border-none !px-12 !py-4 !text-base !rounded-full"
+            >
+              <Sparkles className="w-5 h-5" />
+              Start Your Career &mdash; Free
+            </Button>
+            <Button variant="secondary" size="lg"
+              className="!bg-white/[0.03] !backdrop-blur-xl !border !border-white/[0.12] !text-white !px-12 !py-4 !text-base !rounded-full hover:!bg-white/[0.08] hover:!border-[#D4AF37] hover:!translate-y-[-4px]"
+            >
+              <Play className="w-5 h-5" />
+              Watch Demo
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 opacity-40 pointer-events-none">
+        <span className="text-[10px] uppercase tracking-[4px] font-light">Explore</span>
+        <svg className="w-5 h-5" style={{ color: "#D4AF37" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+      <div className="absolute bottom-8 right-11 z-10 pointer-events-none backdrop-blur-md px-5 py-2.5 rounded-full"
+        style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.04)" }}
+      >
+        <span className="text-2xl font-bold font-heading" style={{ color: "#00F0FF" }}>24</span>
+        <span className="block text-[9px] opacity-40 tracking-[1.5px] uppercase">Live Global Routes</span>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#07070E] to-transparent z-[3]" />
+    </section>
+  );
+}

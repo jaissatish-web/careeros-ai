@@ -61,6 +61,12 @@
   --color-cyan-400: #22d3ee;
   --color-cyan-500: #06b6d4;
 
+  --color-gold: #D4AF37;
+  --color-gold-light: #F6E27A;
+  --color-gold-glow: rgba(212, 175, 55, 0.3);
+  --color-cyan-bright: #00F0FF;
+  --color-deep-bg: #07070E;
+
   --color-glass: rgba(255, 255, 255, 0.05);
   --color-glass-strong: rgba(255, 255, 255, 0.1);
   --color-glass-border: rgba(255, 255, 255, 0.1);
@@ -96,6 +102,7 @@
   --animate-orb-float-1: orb-float-1 8s ease-in-out infinite;
   --animate-orb-float-2: orb-float-2 12s ease-in-out infinite;
   --animate-orb-float-3: orb-float-3 10s ease-in-out infinite;
+  --animate-bounce-down: bounce-down 2.8s ease-in-out infinite;
   --animate-border-glow-rotate: border-glow-rotate 4s linear infinite;
   --animate-particle-drift: particle-drift 15s linear infinite;
 
@@ -303,6 +310,17 @@
   }
   80% {
     transform: translate(30px, -40px) scale(0.94);
+  }
+}
+
+@keyframes bounce-down {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
   }
 }
 

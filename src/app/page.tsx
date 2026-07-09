@@ -1,8 +1,10 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import HeroSection from "@/components/sections/HeroSection";
+
+const GlobeHero = dynamic(() => import("@/components/GlobeHero"), { ssr: false });
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import StatsSection from "@/components/sections/StatsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -31,7 +33,7 @@ export default function Home() {
       <div className="relative z-[1]">
         <Navbar />
         <main>
-          <HeroSection />
+          <GlobeHero />
           <FeaturesSection />
           <StatsSection />
           <TestimonialsSection />
