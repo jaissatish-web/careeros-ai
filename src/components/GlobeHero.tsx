@@ -362,7 +362,7 @@ export default function GlobeHero() {
         }}
       />
       <div className="relative z-10 w-full h-full flex flex-col justify-center items-center text-center px-4 md:px-6 pointer-events-none">
-        <div className="pointer-events-auto">
+              <div className="pointer-events-auto w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
