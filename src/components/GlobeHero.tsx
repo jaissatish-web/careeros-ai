@@ -361,8 +361,8 @@ export default function GlobeHero() {
           backgroundSize: "60px 60px",
         }}
       />
-      <div className="relative z-10 w-full h-full flex flex-col justify-center items-center text-center px-4 md:px-6 pointer-events-none">
-        <div className="pointer-events-auto w-full text-center">
+      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-4 md:px-6 pointer-events-none">
+              <div className="pointer-events-auto flex flex-col items-center max-w-4xl w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
