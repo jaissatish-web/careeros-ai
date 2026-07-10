@@ -59,11 +59,11 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#B8941E] flex items-center justify-center shadow-lg shadow-[#D4AF37]/20">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-white">
-                Career<span className="text-blue-400">OS</span>
+                Career<span className="text-[#D4AF37]">OS</span>
               </span>
             </Link>
 
@@ -75,8 +75,8 @@ export default function Navbar() {
                   href={link.href}
                   className={`px-3 py-2 text-sm rounded-lg transition-colors duration-200 ${
                     isActive(link.href)
-                      ? "text-white bg-white/10"
-                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                      ? "text-[#F6E27A] bg-[#D4AF37]/10"
+                      : "text-gray-400 hover:text-[#F6E27A] hover:bg-[#D4AF37]/5"
                   }`}
                 >
                   {link.label}

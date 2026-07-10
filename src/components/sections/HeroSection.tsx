@@ -9,7 +9,7 @@ function FloatingParticle({ delay, x, y }: { delay: number; x: number; y: number
   const duration = 4 + (Math.sin(x * 0.1) * 0.5 + 0.5) * 2; // deterministic 4-6s based on position
   return (
     <motion.div
-      className="absolute w-1 h-1 rounded-full bg-blue-400/30"
+      className="absolute w-1 h-1 rounded-full bg-[#D4AF37]/30"
       style={{ left: `${x}%`, top: `${y}%` }}
       animate={{
         y: [0, -30, 0],
@@ -75,13 +75,13 @@ function DashboardMockup() {
         <div className="p-6 space-y-4">
           {/* Score bar */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#B8941E] flex items-center justify-center text-white font-bold text-sm">
               94
             </div>
             <div className="flex-1">
               <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
                 <motion.div
-                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-purple-500"
+                  className="h-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#00F0FF]"
                   initial={{ width: 0 }}
                   animate={{ width: "94%" }}
                   transition={{ duration: 1.5, delay: 1, ease: "easeOut" as const }}
@@ -117,12 +117,12 @@ function DashboardMockup() {
             ].map((tip, i) => (
               <motion.div
                 key={i}
-                className="flex items-center gap-2 p-3 rounded-lg bg-blue-500/[0.05] border border-blue-500/10"
+                className="flex items-center gap-2 p-3 rounded-lg bg-[#D4AF37]/[0.05] border border-blue-500/10"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.6 + i * 0.2 }}
               >
-                <Zap className="w-4 h-4 text-blue-400 shrink-0" />
+                <Zap className="w-4 h-4 text-[#D4AF37] shrink-0" />
                 <span className="text-xs text-gray-400">{tip}</span>
               </motion.div>
             ))}
@@ -180,17 +180,17 @@ export default function HeroSection() {
       {/* Background gradient orbs */}
       <GradientOrb
         className="w-[600px] h-[600px] -top-40 -left-40"
-        color="bg-blue-600"
+        color="bg-[#D4AF37]"
         delay={0}
       />
       <GradientOrb
         className="w-[500px] h-[500px] top-1/3 -right-32"
-        color="bg-purple-600"
+        color="bg-[#00F0FF]"
         delay={2}
       />
       <GradientOrb
         className="w-[400px] h-[400px] -bottom-20 left-1/3"
-        color="bg-blue-500"
+        color="bg-[#D4AF37]"
         delay={4}
       />
 
@@ -220,7 +220,7 @@ export default function HeroSection() {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 mb-6"
             >
-              <span className="px-3 py-1 text-xs font-medium text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full backdrop-blur-sm">
+              <span className="px-3 py-1 text-xs font-medium text-[#F6E27A] bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full backdrop-blur-sm">
                 ✨ Now with GPT-4o Integration
               </span>
             </motion.div>
@@ -234,7 +234,7 @@ export default function HeroSection() {
             >
               <span className="text-white">Your Career.</span>
               <br />
-              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] via-[#F6E27A] to-[#00F0FF] bg-clip-text text-transparent">
                 Supercharged by AI.
               </span>
             </motion.h1>
@@ -276,7 +276,7 @@ export default function HeroSection() {
             >
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-2">
-                  {["bg-blue-500", "bg-purple-500", "bg-emerald-500", "bg-amber-500"].map(
+                  {["bg-[#D4AF37]", "bg-purple-500", "bg-emerald-500", "bg-amber-500"].map(
                     (color, i) => (
                       <div
                         key={i}
@@ -301,7 +301,7 @@ export default function HeroSection() {
               </div>
               <div className="h-8 w-px bg-white/10 hidden sm:block" />
               <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-blue-400" />
+                <Users className="w-4 h-4 text-[#D4AF37]" />
                 <span className="text-sm text-gray-400">
                   <span className="text-white font-semibold">4.9/5</span> from 10K+ reviews
                 </span>

@@ -70,7 +70,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col font-body bg-[#030712] text-[#f9fafb]">
+      <body className="min-h-full flex flex-col font-body bg-[#07070E] text-[#f9fafb]">
         {children}
       </body>
     </html>

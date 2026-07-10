@@ -71,7 +71,7 @@ function FAQItem({
         >
           <ChevronDown
             className={`w-5 h-5 transition-colors ${
-              isOpen ? "text-blue-400" : "text-gray-600"
+              isOpen ? "text-[#D4AF37]" : "text-gray-600"
             }`}
           />
         </motion.div>
@@ -100,7 +100,7 @@ export default function FAQSection() {
   return (
     <section className="relative py-24 lg:py-32 bg-black">
       {/* Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-blue-500/[0.02] rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#D4AF37]/[0.02] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
@@ -111,12 +111,12 @@ export default function FAQSection() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-block px-3 py-1 text-xs font-medium text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 rounded-full mb-4">
+            <span className="inline-block px-3 py-1 text-xs font-medium text-[#F6E27A] bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full mb-4">
               FAQ
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
               Frequently Asked{" "}
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#D4AF37] to-[#00F0FF] bg-clip-text text-transparent">
                 Questions
               </span>
             </h2>

@@ -9,9 +9,9 @@ export default function CTASection() {
     <section className="relative py-24 lg:py-32 bg-black overflow-hidden">
       {/* Background gradient */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-purple-600/5 to-transparent" />
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/10 via-[#00F0FF]/5 to-transparent" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#00F0FF]/10 rounded-full blur-3xl" />
       </div>
 
       {/* Grid pattern */}
@@ -27,7 +27,7 @@ export default function CTASection() {
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Icon */}
         <motion.div
-          className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 mb-8 shadow-lg shadow-blue-500/20"
+          className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D4AF37] to-[#B8941E] mb-8 shadow-lg shadow-[#D4AF37]/20"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -46,7 +46,7 @@ export default function CTASection() {
           transition={{ duration: 0.6 }}
         >
           Ready to Land Your{" "}
-          <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-blue-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#D4AF37] via-[#F6E27A] to-[#00F0FF] bg-clip-text text-transparent">
             Dream Job?
           </span>
         </motion.h2>

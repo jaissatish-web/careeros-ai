@@ -37,14 +37,14 @@ export default function Card({
           ? {
               y: -4,
               borderColor: "rgba(255,255,255,0.12)",
-              boxShadow: "0 20px 40px rgba(0,0,0,0.3), 0 0 80px rgba(59,130,246,0.05)",
+              boxShadow: "0 20px 40px rgba(0,0,0,0.3), 0 0 80px rgba(212,175,55,0.05)",
             }
           : undefined
       }
       onClick={onClick}
     >
       {/* Subtle gradient overlay on hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.02] to-purple-500/[0.02] opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/[0.02] to-[#00F0FF]/[0.02] opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       {/* Top edge highlight */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       <div className="relative z-10">{children}</div>

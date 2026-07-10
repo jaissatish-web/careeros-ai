@@ -45,7 +45,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-black border-t border-white/[0.06]">
       {/* Gradient top border */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main Footer */}
@@ -57,11 +57,11 @@ export default function Footer() {
               className="flex items-center gap-2 mb-4"
               whileHover={{ scale: 1.02 }}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#B8941E] flex items-center justify-center shadow-lg shadow-[#D4AF37]/20">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <span className="text-xl font-bold text-white">
-                Career<span className="text-blue-400">OS</span>
+                Career<span className="text-[#D4AF37]">OS</span>
               </span>
             </motion.a>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs mb-6">
@@ -92,7 +92,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-sm text-gray-500 hover:text-gray-300 transition-colors duration-200"
+                      className="text-sm text-gray-500 hover:text-[#F6E27A] transition-colors duration-200"
                     >
                       {link.label}
                     </a>

@@ -17,15 +17,15 @@ export default function Home() {
     <div className="relative overflow-hidden noise-overlay">
       {/* Background Gradient Orbs */}
       <div
-        className="gradient-orb gradient-orb-blue w-[600px] h-[600px] -top-48 -left-48 animate-[orb-float-1_8s_ease-in-out_infinite]"
+        className="gradient-orb gradient-orb-gold w-[600px] h-[600px] -top-48 -left-48 animate-[orb-float-1_8s_ease-in-out_infinite]"
         aria-hidden="true"
       />
       <div
-        className="gradient-orb gradient-orb-purple w-[500px] h-[500px] top-1/3 -right-32 animate-[orb-float-2_12s_ease-in-out_infinite]"
+        className="gradient-orb gradient-orb-gold-light w-[500px] h-[500px] top-1/3 -right-32 animate-[orb-float-2_12s_ease-in-out_infinite]"
         aria-hidden="true"
       />
       <div
-        className="gradient-orb gradient-orb-cyan w-[400px] h-[400px] bottom-1/4 left-1/4 animate-[orb-float_3_10s_ease-in-out_infinite]"
+        className="gradient-orb gradient-orb-gold-light w-[400px] h-[400px] bottom-1/4 left-1/4 animate-[orb-float_3_10s_ease-in-out_infinite]"
         aria-hidden="true"
       />
 

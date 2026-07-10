@@ -31,7 +31,7 @@ const plans = [
     period: "/month",
     description: "For serious job seekers who want the best results.",
     icon: Sparkles,
-    gradient: "from-blue-500 to-purple-600",
+    gradient: "from-[#D4AF37] to-[#B8941E]",
     features: [
       "Unlimited resumes",
       "Advanced ATS optimization",
@@ -52,7 +52,7 @@ const plans = [
     period: "/month",
     description: "For teams and career coaches managing multiple clients.",
     icon: Crown,
-    gradient: "from-purple-500 to-pink-600",
+    gradient: "from-[#00F0FF] to-[#06B6D4]",
     features: [
       "Everything in Pro",
       "Unlimited interview sessions",
@@ -73,8 +73,8 @@ export default function PricingSection() {
   return (
     <section id="pricing" className="relative py-24 lg:py-32 bg-black">
       {/* Background */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/[0.03] rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/[0.03] rounded-full blur-3xl" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#D4AF37]/[0.03] rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#00F0FF]/[0.03] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -85,12 +85,12 @@ export default function PricingSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-3 py-1 text-xs font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-full mb-4">
+          <span className="inline-block px-3 py-1 text-xs font-medium text-[#F6E27A] bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full mb-4">
             Pricing
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Simple,{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#00F0FF] bg-clip-text text-transparent">
               Transparent Pricing
             </span>
           </h2>
@@ -113,7 +113,7 @@ export default function PricingSection() {
               {/* Popular badge */}
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                  <Badge variant="info">⭐ Most Popular</Badge>
+                  <Badge variant="info" className="!bg-[#D4AF37]/20 !text-[#F6E27A] !border-[#D4AF37]/30">⭐ Most Popular</Badge>
                 </div>
               )}
 
@@ -121,7 +121,7 @@ export default function PricingSection() {
                 hover={true}
                 className={`h-full ${
                   plan.popular
-                    ? "border-blue-500/20 bg-white/[0.04] shadow-lg shadow-blue-500/5"
+                    ? "border-[#D4AF37]/20 bg-white/[0.04] shadow-lg shadow-[#D4AF37]/5"
                     : ""
                 }`}
               >

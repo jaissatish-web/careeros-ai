@@ -17,42 +17,42 @@ const features = [
     title: "AI Resume Builder",
     description:
       "Create ATS-optimized resumes in minutes. Our AI analyzes job descriptions and tailors your resume for maximum impact.",
-    gradient: "from-blue-500 to-cyan-500",
+    gradient: "from-[#D4AF37] to-[#B8941E]",
   },
   {
     icon: Share2,
     title: "LinkedIn Optimizer",
     description:
       "Transform your LinkedIn profile with AI-powered suggestions. Get more profile views and recruiter attention.",
-    gradient: "from-blue-600 to-blue-400",
+    gradient: "from-[#D4AF37] to-[#F6E27A]",
   },
   {
     icon: Mail,
     title: "Cover Letter Generator",
     description:
       "Generate personalized cover letters that match each job application. Stand out from hundreds of applicants.",
-    gradient: "from-purple-500 to-pink-500",
+    gradient: "from-[#00F0FF] to-[#06B6D4]",
   },
   {
     icon: Briefcase,
     title: "Job Application Tracker",
     description:
       "Organize your job search in one place. Track applications, interviews, and offers with smart reminders.",
-    gradient: "from-emerald-500 to-teal-500",
+    gradient: "from-[#F6E27A] to-[#D4AF37]",
   },
   {
     icon: MessageSquare,
     title: "Interview Coach",
     description:
       "Practice with AI-powered mock interviews. Get real-time feedback on your answers, tone, and confidence.",
-    gradient: "from-amber-500 to-orange-500",
+    gradient: "from-[#00F0FF] to-[#4A6CF7]",
   },
   {
     icon: BarChart3,
     title: "Career Analytics",
     description:
       "Understand your job search performance. See response rates, optimize timing, and improve your strategy.",
-    gradient: "from-rose-500 to-red-500",
+    gradient: "from-[#D4AF37] to-[#00F0FF]",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function FeaturesSection() {
   return (
     <section id="features" className="relative py-24 lg:py-32 bg-black">
       {/* Subtle background accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/[0.03] rounded-full blur-3xl" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#D4AF37]/[0.03] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -71,12 +71,12 @@ export default function FeaturesSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-3 py-1 text-xs font-medium text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full mb-4">
+          <span className="inline-block px-3 py-1 text-xs font-medium text-[#F6E27A] bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full mb-4">
             Features
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Everything You Need to{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#00F0FF] bg-clip-text text-transparent">
               Land Your Dream Job
             </span>
           </h2>
@@ -107,7 +107,7 @@ export default function FeaturesSection() {
               {/* Learn more link */}
               <motion.a
                 href="#"
-                className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors group"
+                className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-[#D4AF37] hover:text-[#F6E27A] transition-colors group"
                 whileHover={{ x: 4 }}
               >
                 Learn more

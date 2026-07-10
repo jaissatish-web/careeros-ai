@@ -57,8 +57,8 @@ function StatItem({ icon: Icon, value, suffix, label, delay }: StatItemProps) {
       whileHover={{ y: -4 }}
     >
       {/* Icon */}
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/[0.06] flex items-center justify-center mx-auto mb-4">
-        <Icon className="w-6 h-6 text-blue-400" />
+      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#D4AF37]/20 to-[#00F0FF]/20 border border-white/[0.06] flex items-center justify-center mx-auto mb-4">
+        <Icon className="w-6 h-6 text-[#D4AF37]" />
       </div>
 
       {/* Counter */}
@@ -70,7 +70,7 @@ function StatItem({ icon: Icon, value, suffix, label, delay }: StatItemProps) {
       <p className="text-sm text-gray-500">{label}</p>
 
       {/* Hover glow */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/[0.03] to-purple-500/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#D4AF37]/[0.03] to-[#00F0FF]/[0.03] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
     </motion.div>
   );
 }
@@ -106,8 +106,8 @@ export default function StatsSection() {
   return (
     <section className="relative py-24 lg:py-32 bg-black">
       {/* Background accents */}
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-blue-500/[0.03] rounded-full blur-3xl -translate-y-1/2" />
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-purple-500/[0.03] rounded-full blur-3xl -translate-y-1/2" />
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#D4AF37]/[0.03] rounded-full blur-3xl -translate-y-1/2" />
+      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-[#00F0FF]/[0.03] rounded-full blur-3xl -translate-y-1/2" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -118,12 +118,12 @@ export default function StatsSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-3 py-1 text-xs font-medium text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-full mb-4">
+          <span className="inline-block px-3 py-1 text-xs font-medium text-[#F6E27A] bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full mb-4">
             By the Numbers
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Trusted by{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#00F0FF] bg-clip-text text-transparent">
               Hundreds of Thousands
             </span>
           </h2>

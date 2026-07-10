@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
   return (
     <section className="relative py-24 lg:py-32 bg-black overflow-hidden">
       {/* Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-purple-500/[0.03] rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#D4AF37]/[0.03] rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -112,12 +112,12 @@ export default function TestimonialsSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-block px-3 py-1 text-xs font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
+          <span className="inline-block px-3 py-1 text-xs font-medium text-[#F6E27A] bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-full mb-4">
             Testimonials
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Loved by{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#D4AF37] to-[#00F0FF] bg-clip-text text-transparent">
               Professionals Worldwide
             </span>
           </h2>
@@ -142,14 +142,14 @@ export default function TestimonialsSection() {
               >
                 <Card hover={false} className="text-center">
                   {/* Quote icon */}
-                  <Quote className="w-8 h-8 text-blue-500/20 mx-auto mb-4" />
+                  <Quote className="w-8 h-8 text-[#D4AF37]/20 mx-auto mb-4" />
 
                   {/* Stars */}
                   <div className="flex items-center justify-center gap-1 mb-4">
                     {[...Array(t.rating)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-4 h-4 text-amber-400 fill-amber-400"
+                        className="w-4 h-4 text-[#D4AF37] fill-[#D4AF37]"
                       />
                     ))}
                   </div>
@@ -200,7 +200,7 @@ export default function TestimonialsSection() {
                   }}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     i === current
-                      ? "w-6 bg-blue-500"
+                      ? "w-6 bg-[#D4AF37]"
                       : "w-2 bg-white/20 hover:bg-white/30"
                   }`}
                 />

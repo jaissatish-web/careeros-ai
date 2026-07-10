@@ -18,13 +18,13 @@ interface ButtonProps {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:shadow-xl",
+    "bg-gradient-to-r from-[#D4AF37] to-[#B8941E] text-[#07070E] font-bold shadow-lg shadow-[#D4AF37]/25 hover:shadow-[#D4AF37]/40 hover:shadow-xl",
   secondary:
-    "bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-white/20",
+    "bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-[#00F0FF]/30",
   ghost:
     "bg-transparent text-gray-300 hover:text-white hover:bg-white/5",
   outline:
-    "bg-transparent border border-white/20 text-white hover:border-blue-400/50 hover:bg-blue-500/5",
+    "bg-transparent border border-white/20 text-white hover:border-[#D4AF37]/50 hover:bg-[#D4AF37]/5",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -60,7 +60,7 @@ export default function Button({
       transition={{ type: "spring" as const, stiffness: 400, damping: 17 }}
     >
       {variant === "primary" && (
-        <span className="absolute inset-0 rounded-inherit bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-50 pointer-events-none" />
+        <span className="absolute inset-0 rounded-inherit bg-gradient-to-r from-[#D4AF37] to-[#B8941E] opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-50 pointer-events-none" />
       )}
       <span className="relative z-10 flex items-center gap-2">{children}</span>
     </motion.button>
