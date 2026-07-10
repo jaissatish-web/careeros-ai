@@ -2,8 +2,7 @@
 
 import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Play, Sparkles, Award } from "lucide-react";
-import Button from "./ui/Button";
+import { Award } from "lucide-react";
 
 export default function GlobeHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -408,48 +407,10 @@ export default function GlobeHero() {
             ATS-optimised resumes, AI-powered interview coaching &mdash; built for ambitious professionals across the
             Middle East &amp; beyond.
           </motion.p>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap gap-2 md:gap-3 justify-center mb-6 md:mb-10"
-          >
-            {[
-              { icon: "\u2713", label: "98.6% Success Rate" },
-              { icon: "\u26A1", label: "ATS Optimized" },
-              { icon: "\uD83C\uDF10", label: "EN / AR Bilingual" },
-            ].map((tag, i) => (
-              <span key={i} className="text-[10px] md:text-xs font-medium px-3 py-1 md:px-4 md:py-1.5 rounded-full backdrop-blur-sm tracking-[0.5px]"
-                style={{ color: "rgba(255,255,255,0.55)", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)" }}
-              >
-                {tag.icon} {tag.label}
-              </span>
-            ))}
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-3 md:gap-5 justify-center w-full max-w-sm sm:max-w-none mx-auto"
-          >
-            <Button variant="primary" size="lg"
-              className="!bg-gradient-to-r !from-[#D4AF37] !to-[#B8941E] !text-[#07070E] !font-bold !shadow-[0_8px_40px_rgba(212,175,55,0.35)] hover:!shadow-[0_16px_60px_rgba(212,175,55,0.5)] hover:!translate-y-[-4px] !border-none !px-12 !py-4 !text-base !rounded-full !w-full sm:!w-auto"
-            >
-              <Sparkles className="w-5 h-5" />
-              Start Your Career &mdash; Free
-            </Button>
-            <Button variant="secondary" size="lg"
-              className="!bg-white/[0.03] !backdrop-blur-xl !border !border-white/[0.12] !text-white !px-8 md:!px-12 !py-3 md:!py-4 !text-sm md:!text-base !rounded-full hover:!bg-white/[0.08] hover:!border-[#D4AF37] hover:!translate-y-[-4px] !w-full sm:!w-auto"
-            >
-              <Play className="w-5 h-5" />
-              Watch Demo
-            </Button>
-          </motion.div>
-        </div>
-      </div>
+                  </div>
+                </div>
 
-
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#07070E] to-transparent z-[3]" />
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#07070E] to-transparent z-[3]" />
     </section>
   );
 }
