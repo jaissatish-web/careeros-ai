@@ -362,7 +362,7 @@ export default function GlobeHero() {
         }}
       />
       <div className="relative z-10 w-full h-full flex flex-col justify-center items-center text-center px-4 md:px-6 pointer-events-none">
-              <div className="pointer-events-auto w-full text-center">
+        <div className="pointer-events-auto w-full text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -384,7 +384,7 @@ export default function GlobeHero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-heading text-[clamp(32px,9vw,80px)] md:text-[clamp(40px,8vw,80px)] font-extrabold leading-[1.05] max-w-[1000px] mb-3 md:mb-5"
+            className="font-heading text-[clamp(32px,9vw,80px)] md:text-[clamp(40px,8vw,80px)] font-extrabold leading-[1.05] max-w-[1000px] mx-auto mb-3 md:mb-5"
             style={{
               background: "linear-gradient(180deg, #FFFFFF 20%, rgba(255,255,255,0.6) 100%)",
               WebkitBackgroundClip: "text",
@@ -401,16 +401,16 @@ export default function GlobeHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-[clamp(13px,1.2vw,20px)] md:text-[clamp(15px,1.3vw,20px)] font-light max-w-[580px] mb-6 md:mb-10 leading-relaxed tracking-[0.3px] px-2"
+            className="text-[clamp(13px,1.2vw,20px)] md:text-[clamp(15px,1.3vw,20px)] font-light max-w-[580px] mx-auto mb-6 md:mb-10 leading-relaxed tracking-[0.3px]"
             style={{ color: "#B0C4DE", opacity: 0.7 }}
           >
             ATS-optimised resumes, AI-powered interview coaching &mdash; built for ambitious professionals across the
             Middle East &amp; beyond.
           </motion.p>
-                  </div>
-                </div>
+        </div>
+      </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#07070E] to-transparent z-[3]" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#07070E] to-transparent z-[3]" />
     </section>
   );
 }
