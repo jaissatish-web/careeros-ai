@@ -109,7 +109,7 @@ export default function GlobeHero() {
         vertexShader: glowVertex,
         fragmentShader: glowFragment,
         uniforms: {
-          glowColor: { value: new THREE.Color(0xd4af37) },
+          glowColor: { value: new THREE.Color(0x4488ff) },
           intensity: { value: 1.0 },
         },
         side: THREE.FrontSide,
@@ -124,8 +124,8 @@ export default function GlobeHero() {
       earthGroup.add(atmosphere);
 
       // Lights
-      scene.add(new THREE.AmbientLight(0x404060, 0.6));
-      const sun = new THREE.DirectionalLight(0xffffff, 2.5);
+      scene.add(new THREE.AmbientLight(0x4488ff, 0.8));
+      const sun = new THREE.DirectionalLight(0xbbddff, 2.5);
       sun.position.set(5, 3, 5);
       scene.add(sun);
       const back = new THREE.DirectionalLight(0x4488ff, 0.8);
@@ -172,9 +172,9 @@ export default function GlobeHero() {
           canvas.width = 64; canvas.height = 64;
           const ctx = canvas.getContext("2d")!;
           const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-          g.addColorStop(0, "rgba(212, 175, 55, 1)");
-          g.addColorStop(0.2, "rgba(212, 175, 55, 0.8)");
-          g.addColorStop(1, "rgba(212, 175, 55, 0)");
+          g.addColorStop(0, "rgba(68, 136, 255, 1)");
+          g.addColorStop(0.2, "rgba(68, 136, 255, 0.8)");
+          g.addColorStop(1, "rgba(68, 136, 255, 0)");
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, 64, 64);
           return new THREE.CanvasTexture(canvas);
@@ -192,7 +192,7 @@ export default function GlobeHero() {
         pinGroup.position.copy(pos);
         const core = new THREE.Mesh(
           new THREE.SphereGeometry(0.018, 8, 8),
-          new THREE.MeshBasicMaterial({ color: 0xd4af37 })
+          new THREE.MeshBasicMaterial({ color: 0x4488ff })
         );
         pinGroup.add(core);
         const glowSprite = new THREE.Sprite(glowMat);
@@ -230,7 +230,7 @@ export default function GlobeHero() {
         const points = curve.getPoints(60);
 
         const dashMat = new THREE.LineDashedMaterial({
-          color: 0xd4af37,
+          color: 0x00bbff,
           dashSize: 0.035,
           gapSize: 0.025,
           transparent: true,
@@ -248,10 +248,10 @@ export default function GlobeHero() {
             canvas.width = 128; canvas.height = 128;
             const ctx = canvas.getContext("2d")!;
             const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-            g.addColorStop(0, "rgba(246, 226, 122, 1)");
-            g.addColorStop(0.1, "rgba(212, 175, 55, 1)");
-            g.addColorStop(0.5, "rgba(212, 175, 55, 0.6)");
-            g.addColorStop(1, "rgba(212, 175, 55, 0)");
+            g.addColorStop(0, "rgba(0, 187, 255, 1)");
+            g.addColorStop(0.1, "rgba(0, 150, 255, 1)");
+            g.addColorStop(0.5, "rgba(68, 136, 255, 0.6)");
+            g.addColorStop(1, "rgba(68, 136, 255, 0)");
             ctx.fillStyle = g;
             ctx.fillRect(0, 0, 128, 128);
             return new THREE.CanvasTexture(canvas);
@@ -358,7 +358,7 @@ export default function GlobeHero() {
       />
       <div className="absolute inset-0 z-[2] pointer-events-none"
         style={{
-          backgroundImage: "linear-gradient(rgba(212,175,55,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.02) 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(rgba(68,136,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(68,136,255,0.02) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
@@ -448,18 +448,8 @@ export default function GlobeHero() {
           </motion.div>
         </div>
       </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex-col items-center gap-2 opacity-40 pointer-events-none hidden md:flex">
-        <span className="text-[10px] uppercase tracking-[4px] font-light">Explore</span>
-        <svg className="w-5 h-5" style={{ color: "#D4AF37" }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </div>
-      <div className="absolute bottom-8 right-4 md:right-11 z-10 pointer-events-none backdrop-blur-md px-3 md:px-5 py-1.5 md:py-2.5 rounded-full"
-        style={{ background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.04)" }}
-      >
-        <span className="text-lg md:text-2xl font-bold font-heading" style={{ color: "#00F0FF" }}>24</span>
-        <span className="hidden md:block text-[9px] opacity-40 tracking-[1.5px] uppercase">Live Global Routes</span>
-      </div>
+
+
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#07070E] to-transparent z-[3]" />
     </section>
   );
