@@ -13,7 +13,7 @@ const testimonials = [
     initials: "SC",
     color: "from-blue-500 to-cyan-500",
     quote:
-      "CareerOS completely transformed my job search. The AI resume builder helped me land 3 interviews in the first week. The LinkedIn optimizer was a game-changer — my profile views increased by 400%.",
+      "CareerOS completely transformed my job search. The AI resume builder helped me land 3 interviews in the first week.",
     rating: 5,
   },
   {

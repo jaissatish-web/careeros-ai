@@ -7,7 +7,6 @@ const footerLinks = {
   Product: [
     { label: "Features", href: "#features" },
     { label: "Resume Builder", href: "#resume" },
-    { label: "LinkedIn Optimizer", href: "#linkedin" },
     { label: "Cover Letter", href: "#cover-letter" },
     { label: "Job Tracker", href: "#job-tracker" },
     { label: "Interview Coach", href: "#interview" },
@@ -65,7 +64,7 @@ export default function Footer() {
               </span>
             </motion.a>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs mb-6">
-              Your career, supercharged by AI. Build resumes, optimize your LinkedIn, and land your dream job faster.
+              Your career, supercharged by AI. Build resumes, track applications, and land your dream job faster.
             </p>
             {/* Social Icons */}
             <div className="flex items-center gap-3">

@@ -17,11 +17,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "CareerOS AI — The Most Powerful AI Career Platform",
   description:
-    "Create stunning resumes, optimize your LinkedIn, generate cover letters, and land your dream job with the power of AI. Trusted by 500K+ professionals worldwide.",
+    "Create stunning resumes, generate cover letters, and land your dream job with the power of AI. Trusted by 500K+ professionals worldwide.",
   keywords: [
     "AI resume builder",
-    "LinkedIn optimizer",
-    "cover letter generator",
+        "cover letter generator",
     "AI interview coach",
     "job tracker",
     "career platform",
@@ -37,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "CareerOS AI",
     title: "CareerOS AI — The Most Powerful AI Career Platform",
     description:
-      "Create stunning resumes, optimize your LinkedIn, generate cover letters, and land your dream job with the power of AI.",
+      "Create stunning resumes, generate cover letters, and land your dream job with the power of AI.",
     images: [
       {
         url: "/og-image.png",
@@ -51,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CareerOS AI — The Most Powerful AI Career Platform",
     description:
-      "Create stunning resumes, optimize your LinkedIn, generate cover letters, and land your dream job with the power of AI.",
+      "Create stunning resumes, generate cover letters, and land your dream job with the power of AI.",
     images: ["/og-image.png"],
   },
   robots: {

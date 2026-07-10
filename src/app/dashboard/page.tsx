@@ -468,7 +468,6 @@ const upcomingInterviews = [
 
 const quickActions = [
   { label: 'Build Resume', icon: FileText, color: 'from-blue-500 to-indigo-500' },
-  { label: 'Optimize LinkedIn', icon: Share2, color: 'from-sky-500 to-blue-500' },
   { label: 'Generate Cover Letter', icon: PenTool, color: 'from-purple-500 to-pink-500' },
   { label: 'Practice Interview', icon: Mic, color: 'from-emerald-500 to-teal-500' },
 ];

@@ -19,13 +19,7 @@ const features = [
       "Create ATS-optimized resumes in minutes. Our AI analyzes job descriptions and tailors your resume for maximum impact.",
     gradient: "from-[#D4AF37] to-[#B8941E]",
   },
-  {
-    icon: Share2,
-    title: "LinkedIn Optimizer",
-    description:
-      "Transform your LinkedIn profile with AI-powered suggestions. Get more profile views and recruiter attention.",
-    gradient: "from-[#D4AF37] to-[#F6E27A]",
-  },
+
   {
     icon: Mail,
     title: "Cover Letter Generator",

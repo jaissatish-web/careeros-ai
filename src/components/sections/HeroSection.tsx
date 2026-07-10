@@ -143,7 +143,7 @@ export default function HeroSection() {
     setMounted(true);
   }, []);
   const fullText =
-    "Build resumes, optimize LinkedIn profiles, track applications, and ace interviews — all powered by AI.";
+    "Build resumes, track applications, and ace interviews — all powered by AI.";
 
   // Seeded pseudo-random for deterministic SSR
   const seededRandom = (seed: number) => {

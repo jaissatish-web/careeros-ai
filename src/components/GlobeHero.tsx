@@ -405,8 +405,7 @@ export default function GlobeHero() {
             className="text-[clamp(13px,1.2vw,20px)] md:text-[clamp(15px,1.3vw,20px)] font-light max-w-[580px] mb-6 md:mb-10 leading-relaxed tracking-[0.3px] px-2"
             style={{ color: "#B0C4DE", opacity: 0.7 }}
           >
-            ATS-optimised resumes, AI-powered LinkedIn optimization, and
-            interview coaching &mdash; built for ambitious professionals across the
+            ATS-optimised resumes, AI-powered interview coaching &mdash; built for ambitious professionals across the
             Middle East &amp; beyond.
           </motion.p>
           <motion.div
