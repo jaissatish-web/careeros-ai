@@ -90,7 +90,7 @@ export default function GlobeHero() {
       );
       earthGroup.add(earth);
 
-      // Gold atmosphere
+      // Gulf-focused atmosphere (gold/blue tint)
       const glowVertex = `varying vec3 vNormal; varying vec3 vViewDir; void main() {
         vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
         vNormal = normalize(normalMatrix * normal);
@@ -108,7 +108,7 @@ export default function GlobeHero() {
         vertexShader: glowVertex,
         fragmentShader: glowFragment,
         uniforms: {
-          glowColor: { value: new THREE.Color(0x4488ff) },
+          glowColor: { value: new THREE.Color(0xD4AF37) },
           intensity: { value: 1.0 },
         },
         side: THREE.FrontSide,
@@ -131,24 +131,26 @@ export default function GlobeHero() {
       back.position.set(-3, -1, -4);
       scene.add(back);
 
-      // 16 Cities
+      // Gulf-focused cities (primary Gulf + India + global hubs)
       const cities = [
+        // Gulf Region (Primary focus)
+        { name: "Riyadh", lat: 24.7136, lon: 46.6756 },
+        { name: "Dubai", lat: 25.2048, lon: 55.2708 },
+        { name: "Doha", lat: 25.2854, lon: 51.5310 },
+        { name: "Kuwait City", lat: 29.3758, lon: 47.9432 },
+        { name: "Manama", lat: 26.2285, lon: 50.5510 },
+        { name: "Muscat", lat: 23.5880, lon: 58.3820 },
+        { name: "Abu Dhabi", lat: 24.4532, lon: 54.3769 },
+        { name: "Jeddah", lat: 21.4858, lon: 39.1925 },
+        { name: "Dammam", lat: 26.4333, lon: 50.1000 },
+        // India (Major Gulf workforce source)
+        { name: "Mumbai", lat: 19.0760, lon: 72.8777 },
+        { name: "Delhi", lat: 28.6139, lon: 77.2090 },
+        { name: "Chennai", lat: 13.0827, lon: 80.2707 },
+        // Global Hubs
         { name: "London", lat: 51.5, lon: -0.1 },
         { name: "New York", lat: 40.7, lon: -74.0 },
         { name: "Singapore", lat: 1.35, lon: 103.8 },
-        { name: "Sydney", lat: -33.86, lon: 151.2 },
-        { name: "Dubai", lat: 25.2, lon: 55.2 },
-        { name: "Tokyo", lat: 35.67, lon: 139.65 },
-        { name: "San Francisco", lat: 37.77, lon: -122.41 },
-        { name: "Mumbai", lat: 19.07, lon: 72.87 },
-        { name: "Los Angeles", lat: 34.05, lon: -118.24 },
-        { name: "Mexico City", lat: 19.43, lon: -99.13 },
-        { name: "Sao Paulo", lat: -23.55, lon: -46.63 },
-        { name: "Johannesburg", lat: -26.2, lon: 28.04 },
-        { name: "Moscow", lat: 55.75, lon: 37.61 },
-        { name: "Beijing", lat: 39.9, lon: 116.4 },
-        { name: "Bangkok", lat: 13.75, lon: 100.5 },
-        { name: "Paris", lat: 48.85, lon: 2.35 },
       ];
 
       function latLonToVec3(lat: number, lon: number, radius: number) {
@@ -171,9 +173,9 @@ export default function GlobeHero() {
           canvas.width = 64; canvas.height = 64;
           const ctx = canvas.getContext("2d")!;
           const g = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-          g.addColorStop(0, "rgba(68, 136, 255, 1)");
-          g.addColorStop(0.2, "rgba(68, 136, 255, 0.8)");
-          g.addColorStop(1, "rgba(68, 136, 255, 0)");
+          g.addColorStop(0, "rgba(212, 175, 55, 1)");
+          g.addColorStop(0.2, "rgba(212, 175, 55, 0.8)");
+          g.addColorStop(1, "rgba(212, 175, 55, 0)");
           ctx.fillStyle = g;
           ctx.fillRect(0, 0, 64, 64);
           return new THREE.CanvasTexture(canvas);
@@ -191,7 +193,7 @@ export default function GlobeHero() {
         pinGroup.position.copy(pos);
         const core = new THREE.Mesh(
           new THREE.SphereGeometry(0.018, 8, 8),
-          new THREE.MeshBasicMaterial({ color: 0x4488ff })
+          new THREE.MeshBasicMaterial({ color: 0xD4AF37 })
         );
         pinGroup.add(core);
         const glowSprite = new THREE.Sprite(glowMat);
@@ -200,14 +202,18 @@ export default function GlobeHero() {
         markerGroup.add(pinGroup);
       });
 
-      // 24 Route Pairs
+      // 21 Gulf Route Pairs (connecting Gulf cities + India migration paths)
       const routePairs: [number, number][] = [
-        [0, 1], [0, 15], [0, 12], [0, 4],
-        [1, 6], [1, 8], [1, 9], [1, 10],
-        [9, 10], [10, 11], [11, 4], [4, 7],
-        [4, 2], [7, 2], [2, 14], [2, 5],
-        [2, 3], [14, 13], [13, 5], [5, 3],
-        [8, 5], [6, 8], [6, 5], [12, 13],
+        [0, 1], [0, 2], [0, 3], [0, 4], // Riyadh to major Gulf + Kuwait
+        [1, 5], [1, 6], [1, 10], [1, 11], // Dubai connections
+        [2, 1], [2, 6], [2, 12], // Doha connections
+        [3, 4], [3, 7], // Kuwait connections
+        [4, 5], [4, 8], // Manama connections
+        [5, 6], [5, 12], // Muscat connections
+        [6, 1], [6, 10], // Abu Dhabi connections
+        [7, 0], [7, 10], // Jeddah connections
+        [8, 0], [8, 3], // Dammam connections
+        [10, 11], [11, 12], // India connections
       ];
 
       const routeData: {
@@ -229,7 +235,7 @@ export default function GlobeHero() {
         const points = curve.getPoints(60);
 
         const dashMat = new THREE.LineDashedMaterial({
-          color: 0x00bbff,
+          color: 0xD4AF37,
           dashSize: 0.035,
           gapSize: 0.025,
           transparent: true,
@@ -247,10 +253,10 @@ export default function GlobeHero() {
             canvas.width = 128; canvas.height = 128;
             const ctx = canvas.getContext("2d")!;
             const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
-            g.addColorStop(0, "rgba(0, 187, 255, 1)");
-            g.addColorStop(0.1, "rgba(0, 150, 255, 1)");
-            g.addColorStop(0.5, "rgba(68, 136, 255, 0.6)");
-            g.addColorStop(1, "rgba(68, 136, 255, 0)");
+            g.addColorStop(0, "rgba(212, 175, 55, 1)");
+            g.addColorStop(0.1, "rgba(212, 175, 55, 0.9)");
+            g.addColorStop(0.5, "rgba(246, 226, 122, 0.6)");
+            g.addColorStop(1, "rgba(212, 175, 55, 0)");
             ctx.fillStyle = g;
             ctx.fillRect(0, 0, 128, 128);
             return new THREE.CanvasTexture(canvas);
@@ -357,7 +363,7 @@ export default function GlobeHero() {
       />
       <div className="absolute inset-0 z-[2] pointer-events-none"
         style={{
-          backgroundImage: "linear-gradient(rgba(68,136,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(68,136,255,0.02) 1px, transparent 1px)",
+          backgroundImage: "linear-gradient(rgba(212,175,55,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.03) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
@@ -389,12 +395,12 @@ export default function GlobeHero() {
               background: "linear-gradient(180deg, #FFFFFF 20%, rgba(255,255,255,0.6) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              textShadow: "0 0 80px rgba(0,240,255,0.08)",
+              textShadow: "0 0 80px rgba(212,175,55,0.08)",
             }}
           >
-            Your Career,{" "}
+            Land Your Dream Job in the Gulf
             <span style={{ background: "linear-gradient(135deg, #F6E27A, #D4AF37)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              Globally Connected.
+              {" "}&mdash; with AI Precision
             </span>
           </motion.h1>
           <motion.p
@@ -404,8 +410,7 @@ export default function GlobeHero() {
             className="text-[clamp(13px,1.2vw,20px)] md:text-[clamp(15px,1.3vw,20px)] font-light max-w-[580px] mx-auto mb-6 md:mb-10 leading-relaxed tracking-[0.3px]"
             style={{ color: "#B0C4DE", opacity: 0.7 }}
           >
-            ATS-optimised resumes, AI-powered interview coaching &mdash; built for ambitious professionals across the
-            Middle East &amp; beyond.
+            ATS-optimized resumes, interview coaching, and job tracking — built for Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, and Oman.
           </motion.p>
         </div>
       </div>
