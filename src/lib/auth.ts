@@ -1,16 +1,27 @@
 import NextAuth from "next-auth"
-import Github from "next-auth/providers/github"
-import Google from "next-auth/providers/google"
+import Credentials from "next-auth/providers/credentials"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    Github({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    Credentials({
+      name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+      authorize: async (credentials) => {
+        // Will be implemented with Supabase auth
+        // For now, placeholder that validates via Supabase
+        const email = credentials?.email as string
+        const password = credentials?.password as string
+        
+        if (!email || !password) {
+          return null
+        }
+        
+        // TODO: Integrate with Supabase for actual auth
+        return null
+      }
     }),
   ],
   pages: {
