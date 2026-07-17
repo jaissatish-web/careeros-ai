@@ -2,7 +2,6 @@ import { signIn } from '@/lib/auth'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Button from '@/components/ui/Button'
-import { BrandGithub, ChromeIcon } from 'lucide-react'
 
 export default function SignInPage() {
   return (
@@ -25,7 +24,6 @@ export default function SignInPage() {
               }}
             >
               <Button variant="primary" className="w-full justify-center">
-                <ChromeIcon className="w-5 h-5 mr-2" />
                 Continue with Google
               </Button>
             </form>
@@ -37,7 +35,6 @@ export default function SignInPage() {
               }}
             >
               <Button variant="secondary" className="w-full justify-center">
-                <BrandGithub className="w-5 h-5 mr-2" />
                 Continue with GitHub
               </Button>
             </form>
