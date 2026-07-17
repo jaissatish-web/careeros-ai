@@ -12,7 +12,7 @@ export async function interviewCoachAction(formData: FormData) {
   }
 
   try {
-    const result = await ai.interviewCoaching(question, userAnswer, role)
+    const result = await ai.coachInterview(question, userAnswer, role)
     
     return {
       success: true,

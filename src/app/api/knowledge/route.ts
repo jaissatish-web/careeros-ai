@@ -6,6 +6,15 @@ const GULF_COUNTRIES = ['sa', 'ae', 'qa', 'kw', 'bh', 'om']
 
 export async function GET(request: NextRequest) {
   try {
+    // Check if supabase is configured
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+      return NextResponse.json({ 
+        success: false, 
+        error: 'Database not configured',
+        data: [] 
+      })
+    }
+
     const searchParams = request.nextUrl.searchParams
     const country = searchParams.get('country')
     const category = searchParams.get('category')

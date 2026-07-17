@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const result = await ai.interviewCoaching(question, userAnswer, role || 'professional')
+    const result = await ai.coachInterview(question, userAnswer, role || 'professional')
 
     return NextResponse.json({
       success: true,

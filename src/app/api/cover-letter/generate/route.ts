@@ -17,8 +17,7 @@ export async function POST(request: NextRequest) {
       resumeText,
       jobDescription,
       company || 'Gulf Company',
-      country || 'ae',
-      tone || 'professional'
+      country || 'ae'
     )
 
     return NextResponse.json({
