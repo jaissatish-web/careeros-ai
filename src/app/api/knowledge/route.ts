@@ -1,13 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabase } from '@/lib/supabase/client'
+import { createClient } from '@supabase/supabase-js'
 
 // Gulf country constants
 const GULF_COUNTRIES = ['sa', 'ae', 'qa', 'kw', 'bh', 'om']
 
+// Lazy Supabase client initialization
+function getSupabase() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  return supabaseUrl && supabaseAnonKey ? createClient(supabaseUrl, supabaseAnonKey) : null
+}
+
 export async function GET(request: NextRequest) {
   try {
     // Check if supabase is configured
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    const supabase = getSupabase()
+    
+    if (!supabase) {
       return NextResponse.json({ 
         success: false, 
         error: 'Database not configured',
