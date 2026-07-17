@@ -10,8 +10,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: "Password", type: "password" }
       },
       authorize: async (credentials) => {
-        // Will be implemented with Supabase auth
-        // For now, placeholder that validates via Supabase
         const email = credentials?.email as string
         const password = credentials?.password as string
         
@@ -19,7 +17,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           return null
         }
         
-        // TODO: Integrate with Supabase for actual auth
+        // Demo mode: accept any valid email/password
+        // TODO: Replace with Supabase auth when ready
+        if (email.includes('@') && password.length >= 4) {
+          return {
+            id: '1',
+            email,
+            name: email.split('@')[0],
+          }
+        }
+        
         return null
       }
     }),
